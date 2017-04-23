@@ -24,24 +24,26 @@ var Game = {
       height: this.height
     });
 
+    // add the ROT canvas to the screen
     this.mapBox = this.display.getContainer();
     mapBox.appendChild(this.mapBox);
 
     // make sure the canvas is the maximal size for the screen
-    this.mapBox.width = document.getElementById("contentDiv").clientWidth;
-    this.mapBox.height = document.getElementById("contentDiv").clientHeight;
-
+    var contentDiv = document.getElementById("contentDiv");
+    this.mapBox.width = contentDiv.clientWidth;
+    this.mapBox.height = contentDiv.clientHeight;
     this.fontSize = this.display.computeFontSize(this.mapBox.clientWidth, this.mapBox.clientHeight);
     this.setOpts();
 
     // get new rows/cols
-    [this.width, this.height] = this.display.computeSize(document.getElementById("contentDiv").clientWidth, document.getElementById("contentDiv").clientHeight)
-
+    [this.width, this.height] = this.display.computeSize(contentDiv.clientWidth, contentDiv.clientHeight)
     this.setOpts();
+
     this.testBorders();
   },
 
   setOpts: function() {
+  	/** reset the ROT canvas options */
     this.display.setOptions({
       fontFamily: this.font,
       forceSquareRatio: true,

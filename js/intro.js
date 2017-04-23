@@ -3,6 +3,7 @@
     add the game UI elements,
     and initializes the game.
 */
+
 /** Event Handler for Starting a New Game */
 window.addEventListener('keydown', function start(event) {
   window.removeEventListener("keydown", start);
