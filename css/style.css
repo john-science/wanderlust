@@ -49,46 +49,74 @@ p {
   margin-right: auto;
 }
 
-/** CSS from JS-Like */
 
-#loading {
-  text-align: center;
-  font-size: 300%;
-}
-
-#buffer {
+header {
+  position: absolute;
+  width: 100%;
   height: 50px;
-  opacity: 0.7;
-  z-index: 1;
+  top: 0;
+  background: #aaa;
 }
 
-#buffer textarea {
+header textarea {
   font-weight: bold;
   width: 100%;
   height: 100%;
   margin: 0px;
   border: none;
+  background: #aaa;
 }
 
-#buffer.backlog {
+header.backlog {
   height: 250px;
 }
 
-#map .ascii,
-#map .tile div {
+footer {
+  position: absolute;
+  width: 100%;
+  font-height: 25px;
+  bottom: 0;
+  background-color: #ccc;
+  margin: 0px;
+  padding: 5px;
+}
+
+footer li {
+  display: inline-block;
+  padding-right: 50px;
+}
+
+.content {
+  position: absolute;
+  width: 100%;
+  top: 50px;
+  bottom: 50px;
+  background: black;
+}
+
+canvas {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.center {
+  margin: auto;
+  width: 100%;
+}
+
+#map div {
   background-color: black;
 }
 
-#map .ascii .focus {
-  text-decoration: underline;
-}
-
-#map .tile div {
+#map div {
   display: inline-block;
   position: relative;
 }
 
-#map .tile .focus {
+#map .focus {
   position: absolute;
   width: 32px;
   height: 1px;
@@ -97,21 +125,6 @@ p {
   top: 31px;
 }
 
-#keypad {
-  float: left;
-  text-align: center;
-}
-
-#keypad table {
-  text-align: center;
-  border-collapse: collapse;
-}
-
-#keypad td {
-  padding: 0px;
-}
-
-#keypad input,
 #commands input {
   margin: 1px;
   font: menu;
@@ -119,192 +132,5 @@ p {
 
 #commands {
   margin-left: 115px;
-  font-weight: bold;
-}
-
-#status,
-#misc {
-  position: fixed;
-  bottom: 0px;
-  background-color: white;
-  opacity: 0.8;
-  list-style-type: none;
-  margin: 0px;
-  padding: 0px;
-  line-height: 26px;
-}
-
-#status li,
-#misc li {
-  display: inline-block;
-  padding: 0px 10px;
-}
-
-#status {
-  left: 0px;
-  border-top-right-radius: 10px;
-}
-
-#status li {
-  padding-right: 50px;
-}
-
-#misc {
-  right: 0px;
-  border-top-left-radius: 10px;
-}
-
-#misc a {
-  color: black;
-  text-decoration: none;
-}
-
-#misc a:hover {
-  text-decoration: underline;
-}
-
-#mapswitch div {
-  position: absolute;
-  right: 0px;
-  bottom: 26px;
-  display: none;
-  text-align: right;
-  background-color: white;
-  border-top-left-radius: 10px;
-  padding: 3px 8px;
-}
-
-#mapswitch a {
-  display: block;
-}
-
-#mapswitch:hover div {
-  display: block;
-}
-
-#mapswitch a.active {
-  font-weight: bold;
-  cursor: default;
-}
-
-.dialog {
-  background-image: url(img/scroll.jpg);
-  border: 2px solid brown;
-  padding: 0.5em;
-  opacity: 0.95;
-  min-width: 40%;
-  max-width: 80%;
-  text-shadow: 0px 1px 1px #ccc;
-}
-
-.dialog td {
-  font-size: 80%;
-}
-
-.dialog h1 {
-  font-size: 100%;
-  margin: 0px 0px 0.5em 0px;
-}
-
-.dialog thead {
-  font-weight: bold;
-}
-
-.dialog thead td {
-  padding-top: 0.5em;
-  border-bottom: 1px solid black;
-}
-
-.dialog input {
-  vertical-align: middle;
-  font: menu;
-}
-
-.dialog table {
-  margin-bottom: 1em;
-  border-collapse: collapse;
-}
-
-.dialog .name {
-  margin: 1em auto;
-  text-align: center;
-}
-
-.dialog .chargen {
-  margin: auto;
-}
-
-.dialog .chargen td {
-  padding: 0.2em 1em;
-  text-align: center;
-}
-
-.dialog .chargen img {
-  cursor: pointer;
-}
-
-.dialog #footer {
-  font-size: small;
-  text-align: center;
-  margin-top: 3em;
-  margin-bottom: 0px;
-}
-
-.dialog .quests {
-  width: 100%;
-}
-
-.dialog .attributes {
-  width: 100%;
-  text-align: center;
-}
-
-.dialog .attributes td {
-  padding: 0px;
-}
-
-.dialog .attributes .left {
-  text-align: left;
-}
-
-.dialog .attributes .right {
-  text-align: right;
-}
-
-.dialog .attributes .parent td {
-  font-weight: bold;
-  border-top: 1px solid black;
-}
-
-.dialog .attributes .child td:first-child {
-  padding-left: 20px;
-}
-
-.dialog .quests .active {
-  font-style: italic;
-}
-
-.dialog .chat div {
-  border: 1px solid brown;
-  overflow-y: scroll;
-  height: 200px;
-  padding: 3px;
-}
-
-.dialog .chat div p {
-  margin-top: 0px;
-}
-
-.dialog .chat ul {
-  padding: 0px;
-  padding-left: 2px;
-}
-
-.dialog .chat li {
-  list-style-type: none;
-}
-
-.dialog .chat li a:focus {
-  text-shadow: 0px 1px 1px #aaa;
   font-weight: bold;
 }

@@ -3,23 +3,35 @@
 	<head>
 		<meta charset="utf-8" />
 
-		<script src="js/common/rot.js"></script>
+        <script src="js/rot.min.js"></script>
+        <script src="js/ui.js"></script>
+        <script src="js/intro.js"></script>
+        <script src="js/map.js"></script>
+        <script src="js/game.js"></script>
 
 		<link href="css/style.css" rel="stylesheet" type="text/css" />
 
 		<title>Wanderlust</title>
 
-		<link href='http://fonts.googleapis.com/css?family=PT+Mono|Merienda|Droid+Sans+Mono&subset=latin,latin-ext' rel='stylesheet' type='text/css' />
 	</head>
 	<body>
-		<pre id="intro">
+        <header style="display: none" id="header">
+          <textarea readonly="">You break camp and set out into the world...</textarea>
+          <textarea style="display: none;" readonly=""></textarea>
+        </header>
+
+
+<div id="contentDiv" class="content">
+  <div class="center">
+    <div style="font-family: Courier New;" id="mapBox">
+<pre id="intro" style="text-align: center;">
       _______________________________________________  
      /                                           /   \ 
     /                                           /___  \
     |                                           | /_\ |
     |                                           |_\___/
     |               WANDERLUST                  |      
-    |                                           |          
+    |                                           |      
     |  All that is gold does not glitter,       |      
     |  Not all those who wander are lost;       |      
     |  The old that is strong does not wither,  |      
@@ -34,22 +46,51 @@
     |                                           |      
     |                                           |      
     |                                           |      
-    |                                           |         
+    |                                           |      
     |      <span>using <a href="http://ondras.github.com/rot.js/">rot.js</a></span>                         |      
     |      <span>forkable at <a href="https://github.com/theJollySin/wanderlust">GitHub</a></span>                   |      
 ____|______________________________________     |      
 \                                          \    /      
  \__________________________________________\__/       <em></em>
 </pre>
-		<div id="text">
-			<div id="story">
-				<div id="current"></div>
-				<div id="task"></div>
-			</div>
-			<p id="status"></p>
-			<p id="stats"></p>
-		</div>
-		<div id="level"></div>
-		<div id="legend"></div>
+    </div>
+  </div>
+
+  <div style="display: none;" id="commands">
+    <div>Use Arrow Keys to Move.</div>
+    <div>Actions:
+      <input value="Rest (r)" type="button">
+      <input value="Eat (e)" type="button">
+      <input value="Drink (d)" type="button">
+      <input value="Sleep (z)" type="button">
+    </div>
+    <div>Items:
+      <input value="Inventory (i)" type="button">
+      <input value="Drop (d)" type="button">
+      <input value="Pick (p)" type="button">
+    </div>
+    <div>Info:
+      <input value="Health stats (h)" type="button">
+      <input value="Look (l)" type="button">
+      <input value="Message backlog (m)" type="button">
+    </div>
+    <div>Misc:
+      <input value="Save (S)" type="button">
+      <input value="Quit (Q)" type="button">
+      <input value="Load (L)" type="button">
+    </div>
+  </div>
+</div>
+
+
+
+<footer style="display: none;" id="footer">
+  <li style="font-weight: bold;">Sequoia National Forest</li>
+  <li>Elevation: <span>6728</span> <span>ft</span></li>
+  <li>Temperature: <span>46</span> <span>F</span></li>
+  <li>Time: <span>7:53</span> <span>PM</span></li>
+  <li>Weather: <span>Sunny</span></li>
+  <li id="help"><a href="#"><strong>Help</strong></a></li>
+</footer>
 	</body>
 </html>
