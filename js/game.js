@@ -15,6 +15,7 @@ var Game = {
   height: 20,
 
   init: function() {
+  	/** initialize the ROT canvas and game state */
     var mapBox = document.getElementById("mapBox");
     this.display = new ROT.Display({
       fontFamily: this.font,
@@ -24,22 +25,32 @@ var Game = {
       height: this.height
     });
 
-    // add the ROT canvas to the screen
+    /** add the ROT canvas to the screen */
     this.mapBox = this.display.getContainer();
     mapBox.appendChild(this.mapBox);
 
-    // make sure the canvas is the maximal size for the screen
+    /** make sure the canvas is the maximal size for the screen */
     var contentDiv = document.getElementById("contentDiv");
     this.mapBox.width = contentDiv.clientWidth;
     this.mapBox.height = contentDiv.clientHeight;
-    this.fontSize = this.display.computeFontSize(this.mapBox.clientWidth, this.mapBox.clientHeight);
-    this.setOpts();
-
-    // get new rows/cols
-    [this.width, this.height] = this.display.computeSize(contentDiv.clientWidth, contentDiv.clientHeight)
-    this.setOpts();
-
+    this.resetFontSize();
+    this.resetNumRowsCols(0, 0);
     this.testBorders();
+  },
+
+  resetFontSize: function() {
+  	/** reset the font size so it is maximal for at least 20 rows in each direction */
+  	this.display.width = 20;
+  	this.display.height = 20;
+  	this.fontSize = this.display.computeFontSize(this.mapBox.clientWidth, this.mapBox.clientHeight);
+    this.setOpts();
+  },
+
+  resetNumRowsCols: function(widthDiff, heightDiff) {
+  	/** expand the number or rows and columns to match the current font size */
+  	var contentDiv = document.getElementById("contentDiv");
+  	[this.width, this.height] = this.display.computeSize(contentDiv.clientWidth + widthDiff, contentDiv.clientHeight + heightDiff);
+    this.setOpts();
   },
 
   setOpts: function() {
