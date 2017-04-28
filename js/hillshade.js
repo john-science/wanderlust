@@ -93,6 +93,6 @@ var HillShade = (function() {
   };
 }());
 
-alert(HillShade.calc());
+console.log(HillShade.calc());
 
 
