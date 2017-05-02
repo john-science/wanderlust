@@ -35,7 +35,7 @@ var Game = {
     this.mapBox.height = contentDiv.clientHeight;
     this.resetFontSize();
     this.resetNumRowsCols(0, 0);
-    this.testBorders();
+    this.testMap();
   },
 
   resetFontSize: function() {
@@ -66,15 +66,16 @@ var Game = {
     });
   },
 
-  testBorders: function() {
-    /** This is only a test */
-    for (var col = 0; col < this.width; col++) {
-      this.display.draw(col, 0, "♣", "gray");
-      this.display.draw(col, this.height - 1, "♣", "gray");
-    }
-    for (var row = 1; row < this.height; row++) {
-      this.display.draw(0, row, "♣", "gray");
-      this.display.draw(this.width - 1, row, "♣", "gray");
-    }
+  testMap: function() {
+  	/** simple test to draw the NLCD-based map */
+  	for (var r=0; r < this.height; r++) {
+  		for (var c=0; c < this.width; c++) {
+  			var canopy = map_data["canopy"][r][c];
+  			var shade = 1.0;
+  			var canopy_color = 'rgba(25,151,25,' + (canopy * shade / 100.0) + ')';
+  			var land_color = 'rgba(' + land_cover_colors[map_data["land_cover"][r][c]] + ',' + shade + ')';
+  		    this.display.draw(c, r, canopy_symbols[Math.floor(canopy/10)], canopy_color, land_color);
+  	    }
+  	}
   }
 };
