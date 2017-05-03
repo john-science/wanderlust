@@ -35,6 +35,7 @@ var Game = {
     this.mapBox.height = contentDiv.clientHeight;
     this.resetFontSize();
     this.resetNumRowsCols(0, 0);
+    Player.init();
     this.drawMap();
   },
 
@@ -79,5 +80,25 @@ var Game = {
   		    this.display.draw(c, r, canopy_symbols[Math.floor(canopy / 10)], canopy_color, land_color);
   	    }
   	}
+
+  	Player.draw();
+  	//this.display.draw(Player.c, Player.r, "@", "yellow", 'rgba(' + land_cover_colors[map_data["land_cover"][Player.r][Player.c]] + ',1)');
   }
 };
+
+
+var Player = {
+	r: 0,
+	c: 0,
+
+	init: function() {
+		console.log("player.init");
+	},
+	move: function() {
+		; // placeholder
+	},
+	draw: function() {
+		Game.display.draw(this.c, this.r, "@", "yellow", 'rgba(' + land_cover_colors[map_data["land_cover"][this.r][this.c]] + ',1)');
+		document.getElementById('elev').innerText = map_data["elevation"][this.r][this.c];
+	}
+}
