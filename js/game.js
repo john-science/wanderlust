@@ -35,7 +35,7 @@ var Game = {
     this.mapBox.height = contentDiv.clientHeight;
     this.resetFontSize();
     this.resetNumRowsCols(0, 0);
-    this.testMap();
+    this.drawMap();
   },
 
   resetFontSize: function() {
@@ -66,15 +66,17 @@ var Game = {
     });
   },
 
-  testMap: function() {
+  drawMap: function() {
   	/** simple test to draw the NLCD-based map */
+  	var elev_shade = HillShade.grid(0, 0, this.height, this.width);
+
   	for (var r=0; r < this.height; r++) {
   		for (var c=0; c < this.width; c++) {
   			var canopy = map_data["canopy"][r][c];
-  			var shade = 1.0;
-  			var canopy_color = 'rgba(25,151,25,' + (canopy * shade / 100.0) + ')';
+  			var shade = elev_shade[r][c];  /** There may also be a FOV factor one day. */
+  			var canopy_color = 'rgba(25,151,25,' + shade + ')';
   			var land_color = 'rgba(' + land_cover_colors[map_data["land_cover"][r][c]] + ',' + shade + ')';
-  		    this.display.draw(c, r, canopy_symbols[Math.floor(canopy/10)], canopy_color, land_color);
+  		    this.display.draw(c, r, canopy_symbols[Math.floor(canopy / 10)], canopy_color, land_color);
   	    }
   	}
   }

@@ -16,6 +16,6 @@ document.getElementById("help").addEventListener("click", function(e) {
 
   Game.resetFontSize();
   Game.resetNumRowsCols(0, -document.getElementById("commands").clientHeight);
-  Game.testMap();
+  Game.drawMap();
 });
 

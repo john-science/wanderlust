@@ -6,7 +6,7 @@ var HillShade = (function() {
 
   /** TODO: Strange constants. Play with these. */
   var z_factor = 1.0;
-  var cell_size = 5.0;
+  var cell_size = 35.0;
 
   /** Testing input data. */
   var zen_rad = 0.7853981633974483;
@@ -28,12 +28,12 @@ var HillShade = (function() {
     return ((el[r + 1][c - 1] + 2 * el[r + 1][c] + el[r + 1][c + 1]) - (el[r - 1][c - 1] + 2 * el[r - 1][c] + el[r - 1][c + 1])) / (8 * cell_size);
   };
 
-  // Slope_rad = ATAN ( z_factor * √ ( [dz/dx]2 + [dz/dy]2) ) 
   var calc_slope_rad = function(dz_dx, dz_dy) {
-    return Math.atan(z_factor * Math.sqrt(dz_dx * dz_dx + dz_dy * dz_dy));
+    /** Slope_rad = ATAN ( z_factor * √ ( [dz/dx]2 + [dz/dy]2) ) */
+    return Math.atan(z_factor * Math.sqrt((dz_dx * dz_dx) + (dz_dy * dz_dy)));
   };
 
-  var calc_aspect_rad = function(dz_dx, dz_dy) {
+  var calc_aspect_rad_OLD = function(dz_dx, dz_dy) {
     var aspect_rad;
     if (dz_dx !== 0.0) {
       aspect_rad = Math.atan2(dz_dy, -dz_dx);
@@ -41,6 +41,25 @@ var HillShade = (function() {
         aspect_rad += 6.283185307179586;
       }
     } else if (dz_dx === 0.0) {
+      if (dz_dy > 0) {
+        apect_rad = 1.5707963267948966;
+      } else if (dz_dy < 0) {
+        aspect_rad = 4.71238898038469;
+      }
+    }
+
+    return aspect_rad
+  };
+
+  var calc_aspect_rad = function(dz_dx, dz_dy) {
+    var aspect_rad;
+    if (dz_dx != 0.0) {
+      aspect_rad = Math.atan2(dz_dy, -dz_dx);
+    }
+    if (aspect_rad < 0) {
+      aspect_rad += 6.283185307179586;
+    }
+    if (dz_dx == 0.0) {
       if (dz_dy > 0) {
         apect_rad = 1.5707963267948966;
       } else if (dz_dy < 0) {
@@ -75,7 +94,17 @@ var HillShade = (function() {
       var dz_dy = calc_slope_y(r, c);
       var srad = calc_slope_rad(dz_dx, dz_dy);
       var asrad = calc_aspect_rad(dz_dx, dz_dy);
-      return calc_hillshade(zen_rad, srad, azi_rad, asrad);
+      // TODO: Am I dead certain I don't want 1 - this?
+      var result = calc_hillshade(zen_rad, srad, azi_rad, asrad);
+      //console.log(result, r, c);
+      //result = Math.abs(result);
+      //if (result < 0) {console.log(result, r, c);}
+      if (result > 0) {  // TODO: Figure out why I have so many NaN's and negative numbers! I'd like to ditch this.
+        return result;
+      } else {
+        console.log(r, c, dz_dx, dz_dy, srad, asrad, result);
+        return 0.0;
+      }
     },
     setZenith: function(rads) {
       /** Zenith_degress = 90 - Altitude_degrees
@@ -85,18 +114,20 @@ var HillShade = (function() {
     },
     setAzimuth: function(rads) {
       /** Azimuth_math = 360.0 - Azimuth_degrees + 90
-         Azimuth_math = Azimuth_math - 360.0
-         Azimuth_rad = Azimuth_math *  pi / 180.0
+          Azimuth_math = Azimuth_math - 360.0
+          Azimuth_rad = Azimuth_math *  pi / 180.0
        */
       azi_rad = rads;
     },
-    grid: function() {
-      /** return an entire grid of hillshade values */
+    grid: function(min_row, min_col, nrows, ncols) {
+      /** return an entire grid of hillshade values
+        * Note the complete lack of boundary checking.
+        */
       var map = [];
-      for (var r = 0; r < num_rows; r++) {
+      for (var r = min_row; r < (min_row + nrows); r++) {
         var row = [];
-        for (var c = 0; c < num_cols; c++) {
-          row.push(calc(r, c));
+        for (var c = min_col; c < (min_col + ncols); c++) {
+          row.push(this.calc(r, c));
         }
         map.push(row);
       }

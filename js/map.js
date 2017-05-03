@@ -37,3 +37,6 @@ var land_cover_colors = {11: "84,117,168",   /** Open Water */
 /** NLCD canopy comes in percentage (0-99). We will break that range into 10 pieces (0-9) for drawing*/
 var canopy_symbols = [' ', ' ', "'", '"', "♠", "♠", "♠", "♣", "♣", "♣"];
 var canopy_titles = [' ', ' ', "Grassland", 'Shrubland', "Forest", "Forest", "Forest", "Forest", "Dense Forest", "Dense Forest"];
+
+/** init hill shade rendering object */
+HillShade.init(map_data["elevation"]);
