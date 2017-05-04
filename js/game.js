@@ -13,6 +13,8 @@ var Game = {
   fontSize: 20,
   width: 20,
   height: 20,
+  corner_row: 0,
+  corner_col: 0,
 
   init: function() {
   	/** initialize the ROT canvas and game state */
@@ -65,6 +67,27 @@ var Game = {
       height: this.height,
       fontSize: this.fontSize
     });
+  },
+
+  findDisplayCorner: function(center){
+	/** Find the top-left corner of the portion of the map to be displayed.
+		This method is usually used with the Player as the center, but
+		who know.
+		NOTE: This probably does not work for very small maps.
+	*/
+	this.corner_row = center.r - Math.floor(this.height / 2);
+	if (this.corner_row < 0) {
+		this.corner_row = 0;
+	} else if ((this.corner_row + this.height) > map_data["nrows"]) {
+		this.corner_row = map_data["nrows"] - this.height;
+	}
+
+	this.corner_col = center.c - Math.floor(this.width / 2);
+	if (this.corner_col < 0) {
+		this.corner_col = 0;
+	} else if ((this.corner_col + this.width) > map_data["ncols"]) {
+		this.corner_col = map_data["ncols"] - this.width;
+	}
   },
 
   drawMap: function() {
