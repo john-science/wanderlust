@@ -30,6 +30,7 @@ var UI = {
     window.addEventListener('keydown', function(e) {
       var key = e.keyCode;
       if (key in UI.directions) {
+         e.preventDefault();
          Player.move(UI.directions[key]);
          Game.drawMap();
       }
