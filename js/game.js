@@ -101,8 +101,10 @@ var Player = {
 		*/
 		if ((this.r + direction[0]) >= 0 && (this.r + direction[0]) < map_data["nrows"]) {
 			if ((this.c + direction[1]) >= 0 && (this.c + direction[1]) < map_data["ncols"]) {
-				this.r += direction[0];
-				this.c += direction[1];
+				if (map_data["land_cover"][this.r][this.c] > 11) {
+				    this.r += direction[0];
+				    this.c += direction[1];
+				}
 			}
 		}
 	},
