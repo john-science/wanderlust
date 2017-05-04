@@ -99,11 +99,13 @@ var Player = {
 		    Maximum movement along any one axis is one.
 		    zero movement is waiting.
 		*/
-		if ((this.r + direction[0]) >= 0 && (this.r + direction[0]) < map_data["nrows"]) {
-			if ((this.c + direction[1]) >= 0 && (this.c + direction[1]) < map_data["ncols"]) {
-				if (map_data["land_cover"][this.r][this.c] > 11) {
-				    this.r += direction[0];
-				    this.c += direction[1];
+		var new_r = this.r + direction[0];
+		var new_c = this.c + direction[1];
+		if (new_r > -1 && new_r < map_data["nrows"]) {
+			if (new_c > -1 && new_c < map_data["ncols"]) {
+				if (map_data["land_cover"][new_r][new_c] > 11) {
+				    this.r = new_r;
+				    this.c = new_c;
 				}
 			}
 		}
