@@ -99,9 +99,8 @@ var Player = {
 		    Maximum movement along any one axis is one.
 		    zero movement is waiting.
 		*/
-		;  // TODO: boundary check, then update this.r and this.c
-		if ((this.r + direction[0]) >= 0 && (this.r + direction[0]) < 100) {  // TODO: Placeholder!
-			if ((this.c + direction[1]) >= 0 && (this.c + direction[1]) < 100) {  // TODO: Placeholder!
+		if ((this.r + direction[0]) >= 0 && (this.r + direction[0]) < map_data["nrows"]) {
+			if ((this.c + direction[1]) >= 0 && (this.c + direction[1]) < map_data["ncols"]) {
 				this.r += direction[0];
 				this.c += direction[1];
 			}
