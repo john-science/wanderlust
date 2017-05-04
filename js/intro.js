@@ -11,4 +11,5 @@ window.addEventListener('keydown', function start(event) {
   document.getElementById("header").style.display = "";
   document.getElementById("footer").style.display = "";
   Game.init();
+  UI.gameplay();
 });

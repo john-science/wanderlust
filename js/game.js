@@ -70,6 +70,7 @@ var Game = {
   drawMap: function() {
   	/** simple test to draw the NLCD-based map */
   	var elev_shade = HillShade.grid(0, 0, this.height, this.width);
+  	this.display.clear();
 
   	for (var r=0; r < this.height; r++) {
   		for (var c=0; c < this.width; c++) {
@@ -82,7 +83,6 @@ var Game = {
   	}
 
   	Player.draw();
-  	//this.display.draw(Player.c, Player.r, "@", "yellow", 'rgba(' + land_cover_colors[map_data["land_cover"][Player.r][Player.c]] + ',1)');
   }
 };
 
@@ -94,8 +94,18 @@ var Player = {
 	init: function() {
 		console.log("player.init");
 	},
-	move: function() {
-		; // placeholder
+	move: function(direction) {
+		/** direction is a movement list: [1, 1]
+		    Maximum movement along any one axis is one.
+		    zero movement is waiting.
+		*/
+		;  // TODO: boundary check, then update this.r and this.c
+		if ((this.r + direction[0]) >= 0 && (this.r + direction[0]) < 100) {  // TODO: Placeholder!
+			if ((this.c + direction[1]) >= 0 && (this.c + direction[1]) < 100) {  // TODO: Placeholder!
+				this.r += direction[0];
+				this.c += direction[1];
+			}
+		}
 	},
 	draw: function() {
 		Game.display.draw(this.c, this.r, "@", "yellow", 'rgba(' + land_cover_colors[map_data["land_cover"][this.r][this.c]] + ',1)');
