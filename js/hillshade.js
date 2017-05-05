@@ -33,24 +33,6 @@ var HillShade = (function() {
     return Math.atan(z_factor * Math.sqrt((dz_dx * dz_dx) + (dz_dy * dz_dy)));
   };
 
-  var calc_aspect_rad_OLD = function(dz_dx, dz_dy) {
-    var aspect_rad;
-    if (dz_dx !== 0.0) {
-      aspect_rad = Math.atan2(dz_dy, -dz_dx);
-      if (aspect_rad < 0) {
-        aspect_rad += 6.283185307179586;
-      }
-    } else if (dz_dx === 0.0) {
-      if (dz_dy > 0) {
-        apect_rad = 1.5707963267948966;
-      } else if (dz_dy < 0) {
-        aspect_rad = 4.71238898038469;
-      }
-    }
-
-    return aspect_rad
-  };
-
   var calc_aspect_rad = function(dz_dx, dz_dy) {
     var aspect_rad;
     if (dz_dx != 0.0) {
@@ -94,15 +76,10 @@ var HillShade = (function() {
       var dz_dy = calc_slope_y(r, c);
       var srad = calc_slope_rad(dz_dx, dz_dy);
       var asrad = calc_aspect_rad(dz_dx, dz_dy);
-      // TODO: Am I dead certain I don't want 1 - this?
       var result = calc_hillshade(zen_rad, srad, azi_rad, asrad);
-      //console.log(result, r, c);
-      //result = Math.abs(result);
-      //if (result < 0) {console.log(result, r, c);}
-      if (result > 0) {  // TODO: Figure out why I have so many NaN's and negative numbers! I'd like to ditch this.
+      if (result > 0) {
         return result;
       } else {
-        console.log(r, c, dz_dx, dz_dy, srad, asrad, result);
         return 0.0;
       }
     },

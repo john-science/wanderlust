@@ -69,11 +69,9 @@ var Game = {
     });
   },
 
-  findDisplayCorner: function(center){
+  setDisplayCorner: function(center){
 	/** Find the top-left corner of the portion of the map to be displayed.
-		This method is usually used with the Player as the center, but
-		who know.
-		NOTE: This probably does not work for very small maps.
+		This method is usually used with the Player as the center.
 	*/
 	this.corner_row = center.r - Math.floor(this.height / 2);
 	if (this.corner_row < 0) {
@@ -92,15 +90,16 @@ var Game = {
 
   drawMap: function() {
   	/** simple test to draw the NLCD-based map */
-  	var elev_shade = HillShade.grid(0, 0, this.height, this.width);
+  	var elev_shade = HillShade.grid(this.corner_row, this.corner_col, this.height, this.width);  // TODO: Stop recalculating!
   	this.display.clear();
+  	this.setDisplayCorner(Player);
 
   	for (var r=0; r < this.height; r++) {
   		for (var c=0; c < this.width; c++) {
-  			var canopy = map_data["canopy"][r][c];
+  			var canopy = map_data["canopy"][r + this.corner_row][c + this.corner_col];
   			var shade = elev_shade[r][c];  /** There may also be a FOV factor one day. */
   			var canopy_color = 'rgba(25,151,25,' + shade + ')';
-  			var land_color = 'rgba(' + land_cover_colors[map_data["land_cover"][r][c]] + ',' + shade + ')';
+  			var land_color = 'rgba(' + land_cover_colors[map_data["land_cover"][r + this.corner_row][c + this.corner_col]] + ',' + shade + ')';
   		    this.display.draw(c, r, canopy_symbols[Math.floor(canopy / 10)], canopy_color, land_color);
   	    }
   	}
@@ -113,6 +112,8 @@ var Game = {
 var Player = {
 	r: 0,
 	c: 0,
+	symbol: '@',
+	color: 'yellow',
 
 	init: function() {
 		console.log("player.init");
@@ -134,7 +135,7 @@ var Player = {
 		}
 	},
 	draw: function() {
-		Game.display.draw(this.c, this.r, "@", "yellow", 'rgba(' + land_cover_colors[map_data["land_cover"][this.r][this.c]] + ',1)');
+		Game.display.draw(this.c - Game.corner_col, this.r - Game.corner_row, this.symbol, this.color, 'rgba(' + land_cover_colors[map_data["land_cover"][this.r][this.c]] + ',1)');
 		document.getElementById('elev').innerText = map_data["elevation"][this.r][this.c];
 	}
 }
