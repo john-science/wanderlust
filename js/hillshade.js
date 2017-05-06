@@ -1,3 +1,6 @@
+/** ESRI HillShade algo:
+    http://edndoc.esri.com/arcobjects/9.2/NET/shared/geoprocessing/spatial_analyst_tools/how_hillshade_works.htm
+ */
 var HillShade = (function() {
   /** placeholder elevation grid variables */
   var el = [];
@@ -33,8 +36,8 @@ var HillShade = (function() {
     return Math.atan(z_factor * Math.sqrt((dz_dx * dz_dx) + (dz_dy * dz_dy)));
   };
 
-  var calc_aspect_rad = function(dz_dx, dz_dy) {
-    var aspect_rad;
+  var calc_aspect_rad = function(dz_dx, dz_dy) {  // TODO: I believe 0, 0.5 can slide through this untouched
+    var aspect_rad;  // TODO: default?
     if (dz_dx != 0.0) {
       aspect_rad = Math.atan2(dz_dy, -dz_dx);
     }
@@ -42,8 +45,8 @@ var HillShade = (function() {
       aspect_rad += 6.283185307179586;
     }
     if (dz_dx == 0.0) {
-      if (dz_dy > 0) {
-        apect_rad = 1.5707963267948966;
+      if (dz_dy >= 0) {
+        aspect_rad = 1.5707963267948966;
       } else if (dz_dy < 0) {
         aspect_rad = 4.71238898038469;
       }
@@ -77,10 +80,10 @@ var HillShade = (function() {
       var srad = calc_slope_rad(dz_dx, dz_dy);
       var asrad = calc_aspect_rad(dz_dx, dz_dy);
       var result = calc_hillshade(zen_rad, srad, azi_rad, asrad);
-      if (result > 0) {
+      if (result > 0.1) {
         return result;
       } else {
-        return 0.0;
+        return 0.1;
       }
     },
     setZenith: function(rads) {
