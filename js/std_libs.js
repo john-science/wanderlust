@@ -14,6 +14,10 @@ Math.randInt = function(min, max) {
   return Math.floor(min) + Math.floor(Math.random() * Math.floor(max - min));
 }
 
+Math.choice = function(items) {
+  return items[Math.floor(Math.random()*items.length)];
+}
+
 
 /** additions to the Date library */
 
@@ -29,6 +33,17 @@ Date.prototype.addHours = function(h) {
 
 Date.prototype.addMinutes = function(m) {
   this.setTime(this.getTime() + (m * 60 * 1000));
+  return this;
+}
+
+Date.prototype.addSeconds = function(s) {
+  this.setTime(this.getTime() + (s * 1000));
+  return this;
+}
+
+Date.prototype.addMS = function(ms) {
+  this.setTime(this.getTime() + (s
+    ));
   return this;
 }
 
