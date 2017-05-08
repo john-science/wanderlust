@@ -44,7 +44,7 @@ var Game = {
   initGameState: function() {
 	var randomSierraMorning = function() {
 	  	/**  Generate a good date to start a hike in the Sierras */
-	  	var d = new Date("July 1 " + (new Date()).getFullYear()) + " 07:00:00 GMT-0700 (PDT)");
+	  	var d = new Date("July 1 " + (new Date()).getFullYear().toString() + " 07:00:00 GMT-0700 (PDT)");
 	  	d.addDays(Math.floor(Math.random() * 60));
 	  	return d;
   	}
@@ -116,5 +116,6 @@ var Game = {
   	}
 
   	Player.draw();
+  	document.getElementById("time").innerText = Astronomy.getTimeString();
   }
 };

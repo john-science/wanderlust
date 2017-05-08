@@ -29,6 +29,7 @@ var Player = {
 	},
 
 	draw: function() {
+		// TODO: I would like to move this Game and UI stuff out of this class
 		Game.display.draw(this.c - Game.corner_col, this.r - Game.corner_row, this.symbol, this.color, 'rgba(' + land_cover_colors[map_data["land_cover"][this.r][this.c]] + ',1)');
 		document.getElementById('elev').innerText = map_data["elevation"][this.r][this.c];
 	}
@@ -44,5 +45,15 @@ var Astronomy = {
 
 	advanceTime: function(minutes) {
 		this.time.addMinutes(minutes);
+	},
+
+	getTimeString: function() {  // TODO: Does Date not have string formatting?
+		var hr = this.time.getHours();
+		var ampm = (hr < 12) ? " AM" : " PM";
+		if (hr < 13) {
+			return hr.toString() + ":" + this.time.getMinutes().toString().padStart(2, "0") + ampm;
+		} else {
+			return (hr - 12).toString() + ":" + this.time.getMinutes().toString().padStart(2, "0") + ampm;
+		}
 	}
 }
