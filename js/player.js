@@ -11,9 +11,16 @@ var Player = {
 	},
 
 	timeTraveled: function(distance, elev0, elev1, land_cover) {
+		// TODO: Does this feel truthy?
 		var max_elev = (elev1 > elev0) ? elev1 : elev0;
-		/**    speed          * distance *  land cover factor  *  elevation factor */          // TODO: incomplete
-		return this.baseSpeed * distance * (land_cover / 20.0) * (1.0 + (max_elev / 3000.0));  // TODO: incomplete
+		var steepness = (elev1 - elev0) / map_data["edge_meters"];
+		if (steepness > 1.0) {steepness = 1.0;}
+		else if (steepness < -1.0) {
+			steepness = -1.0;
+			steepness /= 2.0;
+		}
+		/**    speed          * distance *  land cover factor  *  elevation factor          * steepness factor */
+		return this.baseSpeed * distance * (land_cover / 20.0) * (1.0 + (max_elev / 4000.0) * (1 + steepness));
 	},
 
 	move: function(direction) {
@@ -28,7 +35,6 @@ var Player = {
 				if (map_data["land_cover"][new_r][new_c] > 11) {
 				    this.r = new_r;
 				    this.c = new_c;
-				    // TODO: Advance time based on distance, elevation change, elevation, health of player
 				    var dist = map_data["edge_meters"];
 				    if ((direction[0] != 0) && (direction[1] != 0)) {
 				    	dist *= 1.4142135623730951;
