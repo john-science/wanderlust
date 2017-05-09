@@ -3,9 +3,17 @@ var Player = {
 	c: 0,
 	symbol: '@',
 	color: 'yellow',  /** TODO: Color could indicate health */
+	baseSpeed: 0.05,  /** min / meter carrying moderate weight over moderate hiking */
+	health: 1.0,
 
 	init: function() {
 		console.log("player.init");
+	},
+
+	timeTraveled: function(distance, elev0, elev1, land_cover) {
+		var max_elev = (elev1 > elev0) ? elev1 : elev0;
+		/**    speed          * distance *  land cover factor  *  elevation factor */          // TODO: incomplete
+		return this.baseSpeed * distance * (land_cover / 20.0) * (1.0 + (max_elev / 3000.0));  // TODO: incomplete
 	},
 
 	move: function(direction) {
@@ -21,8 +29,11 @@ var Player = {
 				    this.r = new_r;
 				    this.c = new_c;
 				    // TODO: Advance time based on distance, elevation change, elevation, health of player
-				    Astronomy.advanceTime(1.0);
-				    // TODO: Display time on footer
+				    var dist = map_data["edge_meters"];
+				    if ((direction[0] != 0) && (direction[1] != 0)) {
+				    	dist *= 1.4142135623730951;
+				    }
+				    Astronomy.advanceTime(this.timeTraveled(dist, map_data["elevation"][this.r][this.c], map_data["elevation"][new_r][new_c], map_data["land_cover"][new_r][new_c]));
 				}
 			}
 		}
