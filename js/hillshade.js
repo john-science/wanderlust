@@ -99,6 +99,11 @@ var HillShade = (function() {
        */
       azi_rad = rads;
     },
+    setSunPosition: function(zen, azi) {
+      /** Set the Sun's zenith and azimuth angles, in radians. */
+      zen_rad = zen;
+      azi_rad = azi;
+    },
     grid: function(min_row, min_col, nrows, ncols) {
       /** return an entire grid of hillshade values
         * Note the complete lack of boundary checking.

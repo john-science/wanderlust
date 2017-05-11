@@ -101,7 +101,8 @@ var Game = {
 
   drawMap: function() {
   	/** simple test to draw the NLCD-based map */
-  	var elev_shade = HillShade.grid(this.corner_row, this.corner_col, this.height, this.width);  // TODO: Stop recalculating!
+  	HillShade.setSunPosition(Sun.getZenith(), Sun.getAzimuth());
+  	var elev_shade = HillShade.grid(this.corner_row, this.corner_col, this.height, this.width);
   	this.display.clear();
   	this.setDisplayCorner(Player);
 

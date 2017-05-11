@@ -9,6 +9,9 @@ var Sun = {
   /** Default: Mount Whitney */
   latitude: 36.5782684,
   longitude: -118.2934244,
+  /** Testing data. */
+  zenith: 0.7853981633974483,
+  azimuth: 2.356194490192345,
 
   setDate: function(d) {
     this.date = d;
@@ -48,6 +51,12 @@ var Sun = {
     var w0 = this.hourAngle();
     var jd = this.date.JulianDate();
     return [12 - 24. * (jd - j_transit + (w0 / 6.283185307179586)) - 24 + 12 - 7, -24. * (jd - j_transit - (w0 / 6.283185307179586)) - 7];
+  },
+  getZenith: function() {
+    return this.zenith;
+  },
+  getAzimuth: function() {
+    return this.azimuth;
   }
 };
 
