@@ -3,7 +3,6 @@ var Player = {
 	c: 0,
 	symbol: '@',
 	color: 'yellow',  /** TODO: Color could indicate health */
-	baseSpeed: 0.05,  /** min / meter carrying moderate weight over moderate hiking */
 	health: 1.0,
 
 	init: function() {
@@ -11,16 +10,23 @@ var Player = {
 	},
 
 	timeTraveled: function(distance, elev0, elev1, land_cover) {
-		// TODO: Does this feel truthy?
-		var max_elev = (elev1 > elev0) ? elev1 : elev0;
-		var steepness = (elev1 - elev0) / map_data["edge_meters"];
-		if (steepness > 1.0) {steepness = 1.0;}
-		else if (steepness < -1.0) {
-			steepness = -1.0;
-			steepness /= 2.0;
-		}
-		/**    speed          * distance *  land cover factor  *  elevation factor          * steepness factor */
-		return this.baseSpeed * distance * (land_cover / 20.0) * (1.0 + (max_elev / 4000.0) * (1 + steepness));
+	  /** Calculate the time it takes for the hiker to travel a given distance. */
+	  var toblersRule = function(slope) {
+	    /** Calculate a hiker's pace in minutes per meter
+	        https://en.wikipedia.org/wiki/Tobler's_hiking_function
+	     */
+	    var pac = 0.01 * Math.exp(3.5 * Math.abs(0.05 + slope));
+	    if (pac < 20) {
+	    	return pac;
+	    } else {
+	    	return 20.0;
+	    }
+	  }
+	  
+	  var pace = toblersRule((elev1 - elev0) / 30.0);
+	  var land_cover_factor = 3 * (land_cover / 100.0);
+	  
+	  return pace * distance * land_cover_factor;
 	},
 
 	move: function(direction) {
