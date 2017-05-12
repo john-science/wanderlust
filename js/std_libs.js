@@ -1,13 +1,15 @@
 /** additions to the Math library */
 
+Math.radians = Math.PI / 180.0;
+
 Math.rad2deg = function(rad) {
   /** convert radians to degrees */
-  return rad * 180.0 / Math.PI;
+  return rad / Math.radians;
 }
 
 Math.deg2rad = function(deg) {
   /** convert degrees to radians */
-  return deg * Math.PI / 180.0;
+  return deg * Math.radians;
 }
 
 Math.randInt = function(min, max) {
