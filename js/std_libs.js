@@ -63,3 +63,13 @@ Date.prototype.JulianDate = function() {
 Date.prototype.daysSince2000 = function() {
   return this.JulianDate() - 2451545;
 }
+
+
+/** Additions to the String library */
+
+String.prototype.padString = function(length, padStr) {
+    var str = this;
+    while (str.length < length)
+        str = padStr + str;
+    return str;
+}
