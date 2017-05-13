@@ -67,9 +67,16 @@ Date.prototype.daysSince2000 = function() {
 
 /** Additions to the String library */
 
-String.prototype.padString = function(length, padStr) {
+String.prototype.padStart = function(length, padStr) {
     var str = this;
     while (str.length < length)
         str = padStr + str;
+    return str;
+}
+
+String.prototype.padEnd = function(length, padStr) {
+    var str = this;
+    while (str.length < length)
+        str = str + padStr;
     return str;
 }
