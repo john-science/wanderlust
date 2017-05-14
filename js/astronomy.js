@@ -46,11 +46,11 @@ var Sun = {
   solarTransitTime: function() {
     return 2451545.5 + this.meanSolarNoon() + 0.0053 * Math.sin(this.meanAnomoly()) - 0.0069 * Math.sin(2.0 * this.eclipticLongitude());
   },
-  riseSet: function() {
+  riseSet: function(tz) {
     var j_transit = this.solarTransitTime();
     var w0 = this.hourAngle();
     var jd = this.date.JulianDate();
-    return [12 - 24. * (jd - j_transit + (w0 / 6.283185307179586)) - 24 + 12 - 7, -24. * (jd - j_transit - (w0 / 6.283185307179586)) - 7];
+    return [12 - 24. * (jd - j_transit + (w0 / 6.283185307179586)) - 24 + 12 + tz, -24. * (jd - j_transit - (w0 / 6.283185307179586)) + tz];
   },
   getZenith: function() {
     return this.zenith;
@@ -77,7 +77,7 @@ console.log(Math.rad2deg(Sun.sunsDeclination()));
 console.log(Sun.meanSolarNoon());
 console.log(Sun.meanAnomoly());
 console.log(Sun.solarTransitTime());
-console.log(Sun.riseSet());
+console.log(Sun.riseSet(-7));
 */
 
 
