@@ -24,7 +24,7 @@ var Player = {
 	  }
 	  
 	  var pace = toblersRule((elev1 - elev0) / 30.0);
-	  var land_cover_factor = 3 * (land_cover / 100.0);
+	  var land_cover_factor = 5 * (land_cover / 100.0);
 	  
 	  return pace * distance * land_cover_factor;
 	},
@@ -49,6 +49,10 @@ var Player = {
 				}
 			}
 		}
+	},
+
+	wait: function(minutes) {
+		Astronomy.advanceTime(minutes);
 	},
 
 	draw: function() {

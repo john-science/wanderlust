@@ -21,10 +21,9 @@ document.getElementById("help").addEventListener("click", function(e) {
 
 
 var UI = {
-  directions: {36: [-1, -1], 38: [-1, 0], 33: [-1, 1],  // row, col
-               37: [0, -1],  12: [0, 0],  39: [0, 1],
-               35: [1, -1],  40: [1, 0],  34: [1, 1],
-               32: [0, 0]},
+  directions: {36: [-1, -1], 38: [-1, 0], 33: [-1, 1], 37: [0, -1],
+               39: [0, 1], 35: [1, -1],  40: [1, 0],  34: [1, 1]},  // row, col
+  wait: {12: 12, 32: 32, 53: 53, 101: 101},
 
   gameplay: function() {
     window.addEventListener('keydown', function(e) {
@@ -32,6 +31,10 @@ var UI = {
       if (key in UI.directions) {
          e.preventDefault();
          Player.move(UI.directions[key]);
+         Game.drawMap();
+      } else if (key in UI.wait) {
+         e.preventDefault();
+         Player.wait(15);
          Game.drawMap();
       }
     });
