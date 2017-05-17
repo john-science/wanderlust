@@ -64,6 +64,16 @@ Date.prototype.daysSince2000 = function() {
   return this.JulianDate() - 2451545;
 }
 
+Date.prototype.getUsTime = function() {
+  var hr = this.getHours();
+  var ampm = (hr < 12) ? " AM" : " PM";
+  if (hr < 13) {
+    return hr.toString() + ":" + this.getMinutes().toString().padStart(2, "0") + ampm;
+  } else {
+    return (hr - 12).toString() + ":" + this.getMinutes().toString().padStart(2, "0") + ampm;
+  }
+}
+
 
 /** Additions to the String library */
 

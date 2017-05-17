@@ -70,13 +70,7 @@ var Astronomy = {
 		this.time.addMinutes(minutes);
 	},
 
-	getTimeString: function() {  // TODO: Does Date not have string formatting?
-		var hr = this.time.getHours();
-		var ampm = (hr < 12) ? " AM" : " PM";
-		if (hr < 13) {
-			return hr.toString() + ":" + this.time.getMinutes().toString().padStart(2, "0") + ampm;
-		} else {
-			return (hr - 12).toString() + ":" + this.time.getMinutes().toString().padStart(2, "0") + ampm;
-		}
+	getTime: function() {
+		return this.time;
 	}
 }

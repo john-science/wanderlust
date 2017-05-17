@@ -36,7 +36,7 @@ var HillShade = (function() {
     return Math.atan(z_factor * Math.sqrt((dz_dx * dz_dx) + (dz_dy * dz_dy)));
   };
 
-  var calc_aspect_rad = function(dz_dx, dz_dy) {  // TODO: I believe 0, 0.5 can slide through this untouched
+  var calc_aspect_rad = function(dz_dx, dz_dy) {
     var aspect_rad;  // TODO: default?
     if (dz_dx != 0.0) {
       aspect_rad = Math.atan2(dz_dy, -dz_dx);
