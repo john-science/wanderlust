@@ -57,20 +57,3 @@ var Player = {
 		document.getElementById('elev').innerText = map_data["elevation"][this.r][this.c];
 	}
 }
-
-
-var Astronomy = {
-	time: new Date(),
-
-	init: function(d) {
-		this.time = d;
-	},
-
-	advanceTime: function(minutes) {
-		this.time.addMinutes(minutes);
-	},
-
-	getTime: function() {
-		return this.time;
-	}
-}

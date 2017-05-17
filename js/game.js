@@ -117,6 +117,6 @@ var Game = {
   	}
 
   	Player.draw();
-  	document.getElementById("time").innerText = Astronomy.getTime().getUsTime();
+  	document.getElementById("time").innerText = Astronomy.time.getUsTime();
   }
 };

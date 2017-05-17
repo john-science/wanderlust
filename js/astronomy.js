@@ -82,3 +82,17 @@ console.log(Sun.riseSet(-7));
 
 
 var Moon = {};
+
+
+// TODO: Is there a better place to save off the time?
+var Astronomy = {
+  time: new Date(),
+
+  init: function(d) {
+    this.time = d;
+  },
+
+  advanceTime: function(minutes) {
+    this.time.addMinutes(minutes);
+  }
+}
