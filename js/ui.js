@@ -21,20 +21,20 @@ document.getElementById("help").addEventListener("click", function(e) {
 
 
 var UI = {
-  directions: {36: [-1, -1], 38: [-1, 0], 33: [-1, 1], 37: [0, -1],
+  moveKeys: {36: [-1, -1], 38: [-1, 0], 33: [-1, 1], 37: [0, -1],
                39: [0, 1], 35: [1, -1],  40: [1, 0],  34: [1, 1]},  // row, col
-  wait: {12: 12, 32: 32, 53: 53, 101: 101},
+  waitKeys: {12: 15, 32: 15, 53: 15, 101: 15},
 
   gameplay: function() {
     window.addEventListener('keydown', function(e) {
       var key = e.keyCode;
-      if (key in UI.directions) {
+      if (key in UI.moveKeys) {
          e.preventDefault();
-         Player.move(UI.directions[key]);
+         Player.move(UI.moveKeys[key]);
          Game.drawMap();
-      } else if (key in UI.wait) {
+      } else if (key in UI.waitKeys) {
          e.preventDefault();
-         Player.wait(15);
+         Player.wait(UT.waitKeys[key]);
          Game.drawMap();
       }
     });

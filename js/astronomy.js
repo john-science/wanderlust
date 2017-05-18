@@ -50,7 +50,7 @@ var Sun = {
     var j_transit = this.solarTransitTime();
     var w0 = this.hourAngle();
     var jd = this.date.JulianDate();
-    return [12 - 24. * (jd - j_transit + (w0 / 6.283185307179586)) - 24 + 12 + tz, -24. * (jd - j_transit - (w0 / 6.283185307179586)) + tz];
+    return [-24. * (jd - j_transit + (w0 / 6.283185307179586)) + tz, -24. * (jd - j_transit - (w0 / 6.283185307179586)) + tz];
   },
   getZenith: function() {
     return this.zenith;
