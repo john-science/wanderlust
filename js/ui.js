@@ -23,7 +23,7 @@ document.getElementById("help").addEventListener("click", function(e) {
 var UI = {
   moveKeys: {36: [-1, -1], 38: [-1, 0], 33: [-1, 1], 37: [0, -1],
                39: [0, 1], 35: [1, -1],  40: [1, 0],  34: [1, 1]},  // row, col
-  waitKeys: {12: 15, 32: 15, 53: 15, 101: 15},
+  waitKeys: {12: 30, 32: 30, 53: 30, 101: 30},
 
   gameplay: function() {
     window.addEventListener('keydown', function(e) {
