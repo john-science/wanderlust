@@ -16,10 +16,10 @@ var Player = {
 	        https://en.wikipedia.org/wiki/Tobler's_hiking_function
 	     */
 	    var pac = 0.01 * Math.exp(3.5 * Math.abs(0.05 + slope));
-	    if (pac < 20) {
+	    if (pac > 1) {
 	    	return pac;
 	    } else {
-	    	return 20.0;
+	    	return 1.0;
 	    }
 	  }
 	  
