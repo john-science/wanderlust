@@ -16,16 +16,15 @@ var Player = {
 	        https://en.wikipedia.org/wiki/Tobler's_hiking_function
 	     */
 	    var pac = 0.01 * Math.exp(3.5 * Math.abs(0.05 + slope));
-	    if (pac > 1) {
-	    	return pac;
+	    if (pac > 0.5) {
+	    	return 0.5;
 	    } else {
-	    	return 1.0;
+	    	return pac;
 	    }
 	  }
 	  
 	  var pace = toblersRule((elev1 - elev0) / 30.0);
-	  var land_cover_factor = 5 * (land_cover / 100.0);
-	  console.log(distance, land_cover_factor, pace, pace * distance * land_cover_factor);
+	  var land_cover_factor = 1.0 + 5.0 * (land_cover / 100.0)**2;
 	  
 	  return pace * distance * land_cover_factor;
 	},
