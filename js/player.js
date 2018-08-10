@@ -24,7 +24,7 @@ var Player = {
 	  }
 	  
 	  var pace = toblersRule((elev1 - elev0) / 30.0);
-	  var land_cover_factor = 1.0 + 5.0 * (land_cover / 100.0)**2;
+	  var land_cover_factor = 1.0 + 6.0 * (land_cover / 100.0)**2;
 	  
 	  return pace * distance * land_cover_factor;
 	},
