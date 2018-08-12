@@ -4,6 +4,7 @@
     the map object,
     and the main UI.
  */
+
  
 var Game = {
   display: null,
@@ -42,13 +43,14 @@ var Game = {
   },
 
   initGameState: function() {
-	var randomSierraMorning = function() {
+	  var randomSierraMorning = function() {
 	  	/**  Generate a good date to start a hike in the Sierras */
-	  	var d = new Date("July 1 " + (new Date()).getFullYear().toString() + " 07:00:00 GMT-0700 (PDT)");
-	  	d.addDays(Math.floor(Math.random() * 60));
+	  	var d = new Date("June 1 2000 07:00:00 GMT-0800");
+	  	//d.addDays(Math.floor(Math.random() * 28));
 	  	return d;
-  	}
-  	Astronomy.init(randomSierraMorning());
+  	}();
+  	Astronomy.init(randomSierraMorning);
+    Sun.setDate(randomSierraMorning);
     Player.init();
   },
 
@@ -117,6 +119,6 @@ var Game = {
   	}
 
   	Player.draw();
-  	document.getElementById("time").innerText = Astronomy.time.getUsTime();
+  	document.getElementById("time").innerText = Astronomy.time.getLocalTime();
   }
 };

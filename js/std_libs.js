@@ -64,8 +64,8 @@ Date.prototype.daysSince2000 = function() {
   return this.JulianDate() - 2451545;
 }
 
-Date.prototype.getUsTime = function() {
-  var hr = this.getHours();
+Date.prototype.getLocalTime = function() {
+  var hr = this.getLocalHours();
   var ampm = (hr < 12) ? " AM" : " PM";
   if (hr < 13) {
     return hr.toString() + ":" + this.getMinutes().toString().padStart(2, "0") + ampm;
@@ -73,6 +73,11 @@ Date.prototype.getUsTime = function() {
     return (hr - 12).toString() + ":" + this.getMinutes().toString().padStart(2, "0") + ampm;
   }
 }
+
+Date.prototype.tz = -8;
+Date.prototype.getLocalHours = function() {
+  return this.getUTCHours() + this.tz;
+};
 
 
 /** Additions to the String library */

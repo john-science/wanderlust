@@ -17,6 +17,13 @@ var Sun = {
     this.date = d;
     this.n = d.daysSince2000();
   },
+  getDate: function() {
+    return this.date;
+  },
+  getLocalTimxxxe: function() {
+    console.log(this.date.getUTCHours(), this.date.getMinutes());
+    return this.date.getHours() + this.date.getMinutes() / 60.0;
+  },
   setLocation: function(lat, lon) {
     this.latitude = lat;
     this.longitude = lon;
