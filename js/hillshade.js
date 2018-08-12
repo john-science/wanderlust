@@ -7,7 +7,7 @@ var HillShade = (function() {
   var num_rows = 0;
   var num_cols = 0;
 
-  /** TODO: Strange constants. Play with these. */
+  /** constants for controlling final affect */
   var z_factor = 1.0;
   var cell_size = 35.0;
 
@@ -37,12 +37,12 @@ var HillShade = (function() {
   };
 
   var calc_aspect_rad = function(dz_dx, dz_dy) {
-    var aspect_rad;  // TODO: default?
+    var aspect_rad;
     if (dz_dx != 0.0) {
       aspect_rad = Math.atan2(dz_dy, -dz_dx);
-    }
-    if (aspect_rad < 0) {
-      aspect_rad += 6.283185307179586;
+      if (aspect_rad < 0) {
+        aspect_rad += 6.283185307179586;
+      }
     }
     if (dz_dx == 0.0) {
       if (dz_dy >= 0) {
@@ -80,16 +80,16 @@ var HillShade = (function() {
       var srad = calc_slope_rad(dz_dx, dz_dy);
       var asrad = calc_aspect_rad(dz_dx, dz_dy);
       var result = calc_hillshade(zen_rad, srad, azi_rad, asrad);
-      // TODO: deal with twilight
       if (azi_rad == 1.0) {
         /** night-time shading */
-        result /= 2.0;
+        result /= 3.0;
         return Math.highpass(result, 0.1);
       } else {
+        /** deal with twilight */
         if (azi_rad < 1.5) {
-          result /= 4 - 2.0 * azi_rad;
+          result /= 7 - 4.0 * azi_rad;
         } else if (azi_rad > 4.5) {
-          result /= 2 * azi_rad - 8;
+          result /= 4 * azi_rad - 17;
         }
         return Math.highpass(result, 0.1);
       }
@@ -128,15 +128,3 @@ var HillShade = (function() {
     }
   };
 }());
-
-
-/**
-// TODO: Testing
-var elevation = [
-  [2450, 2461, 2483],
-  [2452, 2461, 2483],
-  [2447, 2455, 2477]
-];
-HillShade.init(elevation);
-console.log(HillShade.calc(1, 1));
-*/

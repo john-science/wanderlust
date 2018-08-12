@@ -5,9 +5,7 @@ var Player = {
 	color: 'yellow',  /** TODO: Color could indicate health */
 	health: 1.0,
 
-	init: function() {
-		console.log("player.init");
-	},
+	init: function() {},
 
 	timeTraveled: function(distance, elev0, elev1, land_cover) {
 	  /** Calculate the time it takes for the hiker to travel a given distance. */
@@ -56,7 +54,6 @@ var Player = {
 	},
 
 	draw: function() {
-		// TODO: I would like to move this Game and UI stuff out of this class
 		Game.display.draw(this.c - Game.corner_col, this.r - Game.corner_row, this.symbol, this.color, 'rgba(' + land_cover_colors[map_data["land_cover"][this.r][this.c]] + ',1)');
 		document.getElementById('elev').innerText = map_data["elevation"][this.r][this.c];
 	}

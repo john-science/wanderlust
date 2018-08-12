@@ -45,8 +45,8 @@ var Game = {
   initGameState: function() {
 	  var randomSierraMorning = function() {
 	  	/**  Generate a good date to start a hike in the Sierras */
-	  	var d = new Date("June 1 2000 07:00:00 GMT-0800");
-	  	//d.addDays(Math.floor(Math.random() * 28));
+	  	var d = new Date("June 1 " + Math.randInt(2000, 2030).toString() + " 07:00:00 GMT-0800");
+	  	d.addDays(Math.randInt(0, 28));
 	  	return d;
   	}();
   	Astronomy.init(randomSierraMorning);

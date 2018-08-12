@@ -66,7 +66,9 @@ var Sun = {
     return this.azimuth;
   },
   updatePosition: function() {
-    /** zenith = pi/4 * sin((azimuth - 0.54)/(pi/2)) - 0.2 */
+    /** Calculate the Zenith/Azimuth path of the Sun across the sky
+    zenith = pi/4 * sin((azimuth - 0.54)/(pi/2)) - 0.2
+    NOTE: this is just a mid-Northern-latitude, Summer day-only placeholder */
     var rs = this.riseSet(-8);
     var hr = this.date.getLocalHrFraction();
     if (hr < rs[0] || hr > rs[1]) {
@@ -102,7 +104,7 @@ console.log(Sun.riseSet(-7));
 var Moon = {};
 
 
-// TODO: Is there a better place to save off the time?
+/** TODO: Is there a better, more central way, to store the time? */
 var Astronomy = {
   time: new Date(),
 
