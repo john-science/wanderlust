@@ -34,7 +34,7 @@ var UI = {
          Game.drawMap();
       } else if (key in UI.waitKeys) {
          e.preventDefault();
-         Player.wait(UT.waitKeys[key]);
+         Player.wait(UI.waitKeys[key]);
          Game.drawMap();
       }
     });

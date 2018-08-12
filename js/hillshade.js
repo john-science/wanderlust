@@ -13,7 +13,7 @@ var HillShade = (function() {
 
   /** Testing input data. */
   var zen_rad = 0.7853981633974483;
-  var azi_rad = 2.356194490192345;
+  var azi_rad = 0.356194490192345;
 
   var calc_hillshade = function(Zenith_rad, Slope_rad, Azimuth_rad, Aspect_rad) {
     /** Actual hill shade algorithm */

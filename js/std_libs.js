@@ -66,12 +66,11 @@ Date.prototype.daysSince2000 = function() {
 
 Date.prototype.getLocalTime = function() {
   var hr = this.getLocalHours();
+  if (hr < 0) {hr += 24;}
   var ampm = (hr < 12) ? " AM" : " PM";
-  if (hr < 13) {
-    return hr.toString() + ":" + this.getMinutes().toString().padStart(2, "0") + ampm;
-  } else {
-    return (hr - 12).toString() + ":" + this.getMinutes().toString().padStart(2, "0") + ampm;
-  }
+  if (hr > 12) {hr -= 12;}
+  if (hr == 0) {hr = 12;}
+  return hr.toString() + ":" + this.getMinutes().toString().padStart(2, "0") + ampm;
 }
 
 Date.prototype.tz = -8;
