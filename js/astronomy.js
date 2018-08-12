@@ -50,16 +50,31 @@ var Sun = {
     return 2451545.5 + this.meanSolarNoon() + 0.0053 * Math.sin(this.meanAnomoly()) - 0.0069 * Math.sin(2.0 * this.eclipticLongitude());
   },
   riseSet: function(tz) {
+    /** TODO: Could be memoized, to only recalc once per day / week / month */
     var j_transit = this.solarTransitTime();
     var w0 = this.hourAngle();
     var jd = this.date.JulianDate();
-    return [-24. * (jd - j_transit + (w0 / 6.283185307179586)) + tz, -24. * (jd - j_transit - (w0 / 6.283185307179586)) + tz];
+    var rs = [(-24. * (jd - j_transit + (w0 / 6.283185307179586)) + tz) % 24, (-24. * (jd - j_transit - (w0 / 6.283185307179586)) + tz) % 24];
+    if (rs[0] < 0) {rs[0] += 24;}
+    if (rs[1] < 0) {rs[1] += 24;}
+    return rs;
   },
   getZenith: function() {
     return this.zenith;
   },
   getAzimuth: function() {
     return this.azimuth;
+  },
+  updatePosition: function() {
+    /** zenith = pi/4 * sin((azimuth - 0.54)/(pi/2)) - 0.2 */
+    var rs = this.riseSet(-8);
+    var hr = this.date.getLocalHrFraction();
+    if (hr < rs[0] || hr > rs[1]) {
+      this.azimuth = 1.0;
+    } else {
+      this.azimuth = 1.0 + (Math.abs(hr - rs[0]) / Math.abs(rs[1] - rs[0])) * 4.0;
+    }
+    this.zenith = 0.7853981633974483 * Math.sin((this.azimuth - 0.54) / (1.5707963267948966)) - 0.2;
   }
 };
 

@@ -80,10 +80,18 @@ var HillShade = (function() {
       var srad = calc_slope_rad(dz_dx, dz_dy);
       var asrad = calc_aspect_rad(dz_dx, dz_dy);
       var result = calc_hillshade(zen_rad, srad, azi_rad, asrad);
-      if (result > 0.1) {
-        return result;
+      // TODO: deal with twilight
+      if (azi_rad == 1.0) {
+        /** night-time shading */
+        result /= 2.0;
+        return Math.highpass(result, 0.1);
       } else {
-        return 0.1;
+        if (azi_rad < 1.5) {
+          result /= 4 - 2.0 * azi_rad;
+        } else if (azi_rad > 4.5) {
+          result /= 2 * azi_rad - 8;
+        }
+        return Math.highpass(result, 0.1);
       }
     },
     setZenith: function(rads) {

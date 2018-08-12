@@ -20,6 +20,22 @@ Math.choice = function(items) {
   return items[Math.floor(Math.random()*items.length)];
 }
 
+Math.highpass = function(val, limit) {
+  if (val > limit) {
+    return val;
+  } else {
+    return limit;
+  }
+};
+
+Math.lowpass = function(val, limit) {
+  if (val < limit) {
+    return val;
+  } else {
+    return limit;
+  }
+};
+
 
 /** additions to the Date library */
 
@@ -66,16 +82,24 @@ Date.prototype.daysSince2000 = function() {
 
 Date.prototype.getLocalTime = function() {
   var hr = this.getLocalHours();
-  if (hr < 0) {hr += 24;}
   var ampm = (hr < 12) ? " AM" : " PM";
   if (hr > 12) {hr -= 12;}
   if (hr == 0) {hr = 12;}
   return hr.toString() + ":" + this.getMinutes().toString().padStart(2, "0") + ampm;
 }
 
+/** Default timezone is Cali instead of GMT, sue me. */
 Date.prototype.tz = -8;
+
 Date.prototype.getLocalHours = function() {
-  return this.getUTCHours() + this.tz;
+  /** Get the local time (in hours), on a 24-hour clock. */
+  var hr = this.getUTCHours() + this.tz;
+  if (hr < 0) {hr += 24;}
+  return hr;
+};
+
+Date.prototype.getLocalHrFraction = function() {
+  return this.getLocalHours() + this.getMinutes() / 60.0;
 };
 
 
@@ -94,3 +118,9 @@ String.prototype.padEnd = function(length, padStr) {
         str = str + padStr;
     return str;
 }
+
+
+/** testing utilities: because I'm lazy */
+var print = function(...args) {
+   console.log(...args);
+};
