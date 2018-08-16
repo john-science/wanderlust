@@ -3,6 +3,9 @@
 var Weather = {
   temperature: function(elevation, hr, day_of_year) {
       // mid-summer data - Weather.gov - high at 2PM, low at 5AM
+      // HIGH T = -4.4308206856 * ln(elev) + 57.1487797207  (valid over 100 m and below 4000)
+      // LOW T = -2.9128910336 * ln(elev) + 32.1367018169  (valid over 100 m and below 4000)
+      // if LOW T >= HIGH T, set them equal
       // high 32, low 15  @ 1506.322 m
       // high 22.77778, low 8.333333  @ 2782.519 m
       // high 17.77778, low 6.666667  @ 2782.519 m
@@ -17,8 +20,8 @@ var Weather = {
       // high 16.11111, low 5  @ 1256.081 m
       // high 18.33333, low 5.555556  @ 1218.59 m
       // high 25, low 6.666667  @ 1218.59 m
-      // high 18.33333, low 5.555556  @ 8600 m
-      // high 20, low 6.666667  @ 8600 m
+      // high 18.33333, low 5.555556  @ 2621.28 m
+      // high 20, low 6.666667  @ 2621.28 m
     return 13;
   }
 };
