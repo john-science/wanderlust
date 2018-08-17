@@ -1,27 +1,31 @@
 /** To start, we will only model the local temperature,
     more detailed region-wide weather model will come later. */
-var Weather = {
-  temperature: function(elevation, hr, day_of_year) {
-      // mid-summer data - Weather.gov - high at 2PM, low at 5AM
-      // HIGH T = -4.4308206856 * ln(elev) + 57.1487797207  (valid over 100 m and below 4000)
-      // LOW T = -2.9128910336 * ln(elev) + 32.1367018169  (valid over 100 m and below 4000)
-      // if LOW T >= HIGH T, set them equal
-      // high 32, low 15  @ 1506.322 m
-      // high 22.77778, low 8.333333  @ 2782.519 m
-      // high 17.77778, low 6.666667  @ 2782.519 m
-      // high 35, low 20.55556  @ 726.0336 m
-      // high 36.11111, low 20  @ 726.0336 m
-      // high 37.22222, low 19.44444  @ 376.1232 m
-      // high 37.77778, low 19.44444  @ 376.1232 m
-      // high 35, low 17.77778  @ 46.9392 m
-      // high 36.11111, low 17.22222  @ 46.9392 m
-      // high 22.22222, low 12.22222  @ 2039.112 m
-      // high 25, low 12.77778  @ 2039.112 m
-      // high 16.11111, low 5  @ 1256.081 m
-      // high 18.33333, low 5.555556  @ 1218.59 m
-      // high 25, low 6.666667  @ 1218.59 m
-      // high 18.33333, low 5.555556  @ 2621.28 m
-      // high 20, low 6.666667  @ 2621.28 m
-    return 13;
+var Weather = (function() {
+  var hourly_profile = [0.27136, 0.16227, 0.077, 0.02173, 0.00021, 0.014,
+    0.0622, 0.212, 0.4219, 0.588, 0.7542, 0.85868,
+    0.9378, 0.98597, 0.99979, 0.97827, 0.92295, 0.83773,
+    0.72864, 0.60338, 0.47081, 0.34031, 0.2211, 0.1216
+  ];
+  return {
+    temperature: function(elevation, hour, day_of_year) {
+      /** ensure elevation is in valid range (in meters) */
+      var elev = elevation;
+      if (elev < 10) {
+        elev = 10.0;
+      }
+      /** high and low daily temps from weather data in the Sierras */
+      var low_t = 32.1367018169 - 2.9128910336 * Math.log(elev);
+      var high_t = 57.1487797207 - 4.4308206856 * Math.log(elev);
+      /** ensure the hour is a valid int */
+      var hr = Math.round(hour);
+      if (hr < 0) {
+        hr = 0;
+      } else if (hr > 23) {
+        hr = 23;
+      }
+      /** use a typical data temperature profile, from weather data in the Sierras */
+      var temp = low_t + hourly_profile[hr] * (high_t - low_t);
+      return temp;
+    }
   }
-};
+})();
