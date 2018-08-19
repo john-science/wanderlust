@@ -20,13 +20,26 @@ document.getElementById("help").addEventListener("click", function(e) {
 });
 
 
-var Footer = {
-  draw: function() {
-    var eleva = map_data["elevation"][Player.r][Player.c]
-    document.getElementById('elev').innerText = eleva;
-    document.getElementById('temp').innerText = Weather.temp(eleva, Astronomy.time.getLocalHours(), Astronomy.time.getMonth());
+var Footer = (function() {
+  var elev_element = document.getElementById('elev');
+  var temp_element = document.getElementById('temp');
+  var weat_element = document.getElementById('weather');
+
+  return {
+    draw: function() {
+      var eleva = map_data["elevation"][Player.r][Player.c]
+      var hrs = Astronomy.time.getLocalHours();
+      elev_element.innerText = eleva;
+      temp_element.innerText = Weather.temp(eleva, hrs, Astronomy.time.getMonth());
+
+      var rise_set = Sun.riseSet(-8);
+      var weathr = "Twilight";
+      if (hrs > (rise_set[0] + 0.5) &&  hrs < (rise_set[1] - 0.5)) {weathr = "Sunny";}
+      else if (hrs > (rise_set[1]) + 0.5 || hrs < (rise_set[0] - 0.5)) {weathr = 'Night';}
+      weat_element.innerText = weathr;
+    }
   }
-};
+})();
 
 
 var UI = {
