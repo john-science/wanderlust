@@ -7,7 +7,7 @@ var Weather = (function() {
     0.72864, 0.60338, 0.47081, 0.34031, 0.2211, 0.1216
   ];
   return {
-    temperature: function(elevation, hour, day_of_year) {
+    temp: function(elevation, hour, day_of_year) {
       /** ensure elevation is in valid range (in meters) */
       var elev = elevation;
       if (elev < 10) {

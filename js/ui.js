@@ -16,7 +16,17 @@ document.getElementById("help").addEventListener("click", function(e) {
   Game.resetFontSize();
   Game.resetNumRowsCols(0, -document.getElementById("commands").clientHeight);
   Game.drawMap();
+  Footer.draw();
 });
+
+
+var Footer = {
+  draw: function() {
+    var eleva = map_data["elevation"][Player.r][Player.c]
+    document.getElementById('elev').innerText = eleva;
+    document.getElementById('temp').innerText = Math.round(Weather.temp(eleva, Astronomy.time.getLocalHours(), null));
+  }
+};
 
 
 var UI = {
@@ -31,10 +41,12 @@ var UI = {
          e.preventDefault();
          Player.move(UI.moveKeys[key]);
          Game.drawMap();
+         Footer.draw();
       } else if (key in UI.waitKeys) {
          e.preventDefault();
          Player.wait(UI.waitKeys[key]);
          Game.drawMap();
+         Footer.draw();
       }
     });
   }
