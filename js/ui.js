@@ -24,7 +24,7 @@ var Footer = {
   draw: function() {
     var eleva = map_data["elevation"][Player.r][Player.c]
     document.getElementById('elev').innerText = eleva;
-    document.getElementById('temp').innerText = Math.round(Weather.temp(eleva, Astronomy.time.getLocalHours(), null));
+    document.getElementById('temp').innerText = Weather.temp(eleva, Astronomy.time.getLocalHours(), Astronomy.time.getMonth());
   }
 };
 

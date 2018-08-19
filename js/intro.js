@@ -6,10 +6,11 @@
 
 /** Event Handler for Starting a New Game */
 window.addEventListener('keydown', function start(event) {
-  window.removeEventListener("keydown", start);
-  document.getElementById("intro").remove();
-  document.getElementById("header").style.display = "";
-  document.getElementById("footer").style.display = "";
-  Game.init();
-  UI.gameplay();
+	window.removeEventListener("keydown", start);
+	document.getElementById("intro").remove();
+	document.getElementById("header").style.display = "";
+	document.getElementById("footer").style.display = "";
+	Game.init();
+	UI.gameplay();
+	Footer.draw();
 });

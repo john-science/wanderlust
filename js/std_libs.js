@@ -36,6 +36,13 @@ Math.lowpass = function(val, limit) {
   }
 };
 
+Math.valid_int = function(val, low, high) {
+  var v = Math.round(val);
+  if (v < low) {v = low;}
+  else if (v > high) {v = high;}
+  return v;
+}
+
 
 /** additions to the Date library */
 
