@@ -2,8 +2,9 @@ var Player = {
 	r: 0,
 	c: 0,
 	symbol: '@',
-	color: 'yellow',  /** TODO: Color could indicate health */
+	color: 'yellow',  /** TODO: Color could indicate health, or sleepiness */
 	health: 1.0,
+	hrs_awake: -0.5,
 
 	init: function() {},
 
@@ -43,7 +44,9 @@ var Player = {
 				    if ((direction[0] != 0) && (direction[1] != 0)) {
 				    	dist *= 1.4142135623730951;
 				    }
-				    Astronomy.advanceTime(this.timeTraveled(dist, map_data["elevation"][this.r][this.c], map_data["elevation"][new_r][new_c], map_data["land_cover"][new_r][new_c]));
+				    var time = this.timeTraveled(dist, map_data["elevation"][this.r][this.c], map_data["elevation"][new_r][new_c], map_data["land_cover"][new_r][new_c]);
+				    Astronomy.advanceTime(time);
+				    this.hrs_awake += time / 60.0;
 				}
 			}
 		}
@@ -51,6 +54,14 @@ var Player = {
 
 	wait: function(minutes) {
 		Astronomy.advanceTime(minutes);
+		this.sleep(minutes);
+	},
+
+	sleep: function(minutes) {
+		/** TODO: this logic could be more continuous */
+		if (minutes > 539) {this.hrs_awake = -0.5;}
+		else if (minutes > 449) {this.hrs_awake = 0.0;}
+		else if (minutes > 359) {this.hrs_awake = 1.0;}
 	},
 
 	draw: function() {
