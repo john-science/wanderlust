@@ -81,31 +81,12 @@ var Sun = {
 };
 
 
-// Check your answer:  https://www.esrl.noaa.gov/gmd/grad/solcalc/
-/** Test
-var randomSierrasMorning = function(yr) {
-  // Generate a good date to start a hike in the Sierras
-  var d = new Date("July 1 2017 07:00:00 GMT-0700 (PDT)");
-  d.addDays(Math.floor(Math.random() * 60));
-  return d;
-}
-
-var ddd = randomSierrasMorning(2017);
-console.log(ddd);
-Sun.setDate(ddd);
-console.log(Math.rad2deg(Sun.sunsDeclination()));
-console.log(Sun.meanSolarNoon());
-console.log(Sun.meanAnomoly());
-console.log(Sun.solarTransitTime());
-console.log(Sun.riseSet(-7));
-*/
-
-
+/** TODO: all I want are: (a) rise/set times and (b) full/half/new/no moon status */
 var Moon = {};
 
 
-/** TODO: Is there a better, more central way, to store the time? */
 var Astronomy = {
+  /** This is the central location for all time in the game. */
   time: new Date(),
 
   init: function(d) {
