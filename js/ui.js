@@ -62,5 +62,17 @@ var UI = {
          Footer.draw();
       }
     });
+    document.getElementById('rest_button').addEventListener("click", function(e) {
+      e.preventDefault();
+      Player.wait(30);
+      Game.drawMap();
+      Footer.draw();
+    });
+    document.getElementById('sleep_button').addEventListener("click", function(e) {
+      e.preventDefault();
+      Player.wait(480);
+      Game.drawMap();
+      Footer.draw();
+    });
   }
 }
