@@ -1,6 +1,6 @@
 var Player = {
-	r: 0,
-	c: 0,
+	r: Math.randInt(0, 100),
+	c: Math.randInt(0, 100),
 	symbol: '@',
 	color: 'yellow',  /** TODO: Color could indicate health, or sleepiness */
 	health: 1.0,
