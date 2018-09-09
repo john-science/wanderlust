@@ -1,15 +1,24 @@
 
 var Message = (function() {
 	var messages = ['You break camp and set out into the world...'];
-	var window_id = 'message_log';
+	var window_id = "message_log";
+	var wind = document.getElementById(window_id);
 
 	return {
-		add: function(mess) {this.messages.push(mess)},
-		clear: function() {this.messages = [];}  /** TODO: Also, wipe the text in the UI element */
-		get_all: function() {return this.messages},
+		init: function() {
+			wind = document.getElementById(window_id);
+			wind.value = messages[0];
+		},
+		add: function(mess) {messages.push(mess);},
+		clear: function() {
+			messages = [];
+			wind.value = "";
+		},
+		get_all: function() {return messages;},
 		print: function(mess) {
 			this.add(mess);
-			console.log(mess);  /** TODO: This is where the UI interaction will have to happen */
+            wind.value += "\n" + mess;
+            wind.scrollTop = wind.scrollHeight;
 		},
 	}
 })();

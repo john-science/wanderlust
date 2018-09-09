@@ -40,6 +40,7 @@ var Game = {
     this.resetNumRowsCols(0, 0);
     this.initGameState();
     this.drawMap();
+    Message.init();
   },
 
   initGameState: function() {
