@@ -11,18 +11,15 @@ var Player = {
 	init: function() {},
 
 	timeTraveled: function(distance, elev0, elev1, land_cover) {
-	  /** Calculate the time it takes for the hiker to travel a given distance. */
-	  var toblersRule = function(slope) {
-	    /** Calculate a hiker's pace in minutes per meter
-	        https://en.wikipedia.org/wiki/Tobler's_hiking_function
-	     */
-	    var pac = 0.01 * Math.exp(3.5 * Math.abs(0.05 + slope));
-	    if (pac > 0.5) {
-	    	return 0.5;
-	    } else {
-	    	return pac;
-	    }
-	  }
+		/** Calculate the time it takes for the hiker to travel a given distance. */
+		var toblersRule = function(slope) {
+			/** Calculate a hiker's pace in minutes per meter
+			https://en.wikipedia.org/wiki/Tobler's_hiking_function
+			 */
+			var pac = 0.01 * Math.exp(3.5 * Math.abs(0.05 + slope));
+			if (pac > 0.5) { return 0.5; }
+			else { return pac; }
+		}
 
 	  var pace = toblersRule((elev1 - elev0) / 30.0);
 	  var land_cover_factor = 1.0 + 6.0 * (land_cover / 100.0)**2;
@@ -85,6 +82,7 @@ var Player = {
 	},
 
 	draw: function() {
-		Game.display.draw(this.c - Game.corner_col, this.r - Game.corner_row, this.symbol, this.color, 'rgba(' + land_cover_colors[map_data["land_cover"][this.r][this.c]] + ',1)');
+		Game.display.draw(this.c - Game.corner_col, this.r - Game.corner_row, this.symbol, this.color,
+						  'rgba(' + land_cover_colors[map_data["land_cover"][this.r][this.c]] + ',1)');
 	}
 }

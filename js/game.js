@@ -1,11 +1,11 @@
 /** The main Game controller, that will contain and organize:
-    ROT.display,
-    the player object,
-    the map object,
-    and the main UI.
+ROT.display,
+the player object,
+the map object,
+and the main UI.
  */
 
- 
+
 var Game = {
   display: null,
   mapBox: null,
@@ -85,7 +85,7 @@ var Game = {
 
   setDisplayCorner: function(center){
 	/** Find the top-left corner of the portion of the map to be displayed.
-		This method is usually used with the Player as the center.
+	This method is usually used with the Player as the center.
 	*/
 	this.corner_row = center.r - Math.floor(this.height / 2);
 	if (this.corner_row < 0) {

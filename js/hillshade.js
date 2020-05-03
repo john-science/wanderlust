@@ -1,5 +1,5 @@
 /** ESRI HillShade algo:
-    http://edndoc.esri.com/arcobjects/9.2/NET/shared/geoprocessing/spatial_analyst_tools/how_hillshade_works.htm
+http://edndoc.esri.com/arcobjects/9.2/NET/shared/geoprocessing/spatial_analyst_tools/how_hillshade_works.htm
  */
 var HillShade = (function() {
   /** placeholder elevation grid variables */

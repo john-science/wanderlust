@@ -17,8 +17,8 @@ var Message = (function() {
 		get_all: function() {return messages;},
 		print: function(mess) {
 			this.add(mess);
-            wind.value += "\n" + mess;
-            wind.scrollTop = wind.scrollHeight;
+			wind.value += "\n" + mess;
+			wind.scrollTop = wind.scrollHeight;
 		},
 	}
 })();
