@@ -1,6 +1,6 @@
 /** Handle the various UI elements. */
- 
- 
+
+
 /** Show the hidden help panel */
 document.getElementById("help").addEventListener("click", function(e) {
   var display_flag = document.getElementById("commands").style.display;
@@ -24,6 +24,7 @@ var Footer = (function() {
   var elev_element = document.getElementById('elev');
   var temp_element = document.getElementById('temp');
   var weat_element = document.getElementById('weather');
+  var scor_element = document.getElementById('score');
 
   return {
     draw: function() {
@@ -37,6 +38,8 @@ var Footer = (function() {
       if (hrs > (rise_set[0] + 0.5) &&  hrs < (rise_set[1] - 0.5)) {weathr = "Sunny";}
       else if (hrs > (rise_set[1]) + 0.5 || hrs < (rise_set[0] - 0.5)) {weathr = 'Night';}
       weat_element.innerText = weathr;
+
+      scor_element.innerText = Math.ceil(Player.score);
     }
   }
 })();

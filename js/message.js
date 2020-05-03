@@ -1,6 +1,6 @@
 
 var Message = (function() {
-	var messages = ['You break camp and set out into the world...'];
+	var messages = ['You walk into Sequoia National Forest...'];
 	var window_id = "message_log";
 	var wind = document.getElementById(window_id);
 
