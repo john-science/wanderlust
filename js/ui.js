@@ -24,7 +24,7 @@ var Footer = (function() {
   var elev_element = document.getElementById('elev');
   var temp_element = document.getElementById('temp');
   var weat_element = document.getElementById('weather');
-  var scor_element = document.getElementById('score');
+  var scor_element = document.getElementById('exp');
 
   return {
     draw: function() {
@@ -39,7 +39,7 @@ var Footer = (function() {
       else if (hrs > (rise_set[1]) + 0.5 || hrs < (rise_set[0] - 0.5)) {weathr = 'Night';}
       weat_element.innerText = weathr;
 
-      scor_element.innerText = Math.ceil(Player.score);
+      scor_element.innerText = Math.ceil(Player.exp);
     }
   }
 })();

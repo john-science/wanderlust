@@ -3,15 +3,6 @@
 > This game isn't a game yet. So far, you just walk.
 
 
-## Game Score
-
-The game score will be a combination of these items:
-
-1. How long can you stay out before you have to bail.  (+1 point/minute)
-2. How many moments of quiet rest did you get? (+5 points/minute, not sleep)
-3. How much land did you cover?  (+1 point/grid cell)
-
-
 ## Game Ideas
 
 1. You carefully pack your gear before you start.

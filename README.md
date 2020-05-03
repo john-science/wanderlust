@@ -1,6 +1,6 @@
 # wanderlust
 
-> It's about the journey, not the destination.
+> It's the journey, not the destination.
 
 This game is, essentially, a hiking simulator. There will never be orcs to slay or laser gun battles. It is not meant to be exciting or fast-paced. Generally, unless things are going very badly, life is slower outdoors and the game should reflect that.
 

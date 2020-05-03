@@ -6,7 +6,7 @@ var Player = {
 	health: 1.0,
 	hrs_awake: -0.5,
 	seen_it: {},
-	score: 0,
+	exp: 0,
 
 	init: function() {},
 
@@ -51,11 +51,11 @@ var Player = {
 					Astronomy.advanceTime(time);
 					this.hrs_awake += time / 60.0;
 
-					/* Update the score */
-					this.score += time;  /* Walking is always worthwhile */
+					/* Update the Experience */
+					this.exp += time;  /* Walking is always worthwhile */
 					if (!this.seen_it.hasOwnProperty([new_r>>2, new_c>>2])) {
 						/* Exploring new places is good for the soul */
-						this.score += time;
+						this.exp += time;
 					}
 					/* Update the exploration history */
 					this.seen_it[[new_r>>2, new_c>>2]] = true;
@@ -69,11 +69,11 @@ var Player = {
 		this.sleep(minutes);
 
 		if (minutes < 61) {
-			/* Contemplative sitting is worth more than rushing around */
-			this.score += 3 * minutes;
+			/* Contemplative sitting is worth at least as much as rushing around */
+			this.exp += 2 * minutes;
 		} else {
 			/* Sleeping is great, but you aren't really experiencing much. */
-			this.score += minutes / 3;
+			this.exp += minutes / 16;
 		}
 	},
 
