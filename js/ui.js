@@ -33,13 +33,15 @@ var Footer = (function() {
       elev_element.innerText = eleva;
       temp_element.innerText = Weather.temp(eleva, hrs, Astronomy.time.getMonth());
 
-      var rise_set = Sun.riseSet(-8);
+      var rise_set = Sun.rs;  // TODO: This doesn't appear to be updating.
       var weathr = "Twilight";
       if (hrs > (rise_set[0] + 0.5) &&  hrs < (rise_set[1] - 0.5)) {weathr = "Sunny";}
       else if (hrs > (rise_set[1]) + 0.5 || hrs < (rise_set[0] - 0.5)) {weathr = 'Night';}
       weat_element.innerText = weathr;
 
       scor_element.innerText = Math.ceil(Player.exp);
+
+      // TODO: draw the messages. Grab some from: the weather, the map, and the player objects
     }
   }
 })();

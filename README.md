@@ -1,12 +1,12 @@
-# wanderlust
+# Wanderlust
 
 > It's the journey, not the destination.
 
-This game is, essentially, a hiking simulator. There will never be orcs to slay or laser gun battles. It is not meant to be exciting or fast-paced. Generally, unless things are going very badly, life is slower outdoors and the game should reflect that.
+Wanderlust is, essentially, a hiking simulator. There will never be gun fights or car chases. You won't run into orcs or grizzly bears. Bandits will never jump out at you, and you won't be able to kill people to loot gold coinss. This game is not meant to be exciting or fast-paced. It will hopefully be slow-paced and contemplative. This should barely even qualify as a game.
 
-Also, this game is a boutique playground for slow enjoyment on the part of the dev team as well. It is probably that no final, production-ready version of this game will ever exist.
+Similarly, Wanderlust is a relaxing pursuit for the developer. The angle of the sun will accurately shade the hillsides you walk over. Even though I doubt anyone will notice. It is probable that no final, production-ready version of this game will ever exist.
 
 
 ## Technology
 
-A Client-Side, JavaScript Roguelike built using [rot.js](https://github.com/ondras/rot.js).
+This Rouglite was built using vanilla JavaScript and only one library: [rot.js](https://github.com/ondras/rot.js)

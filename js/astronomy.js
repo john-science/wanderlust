@@ -12,6 +12,8 @@ var Sun = {
   /** Testing data. */
   zenith: 0.7853981633974483,
   azimuth: 2.356194490192345,
+  rs: [7, 16],
+  rs_n: -1,
 
   setDate: function(d) {
     this.date = d;
@@ -49,15 +51,21 @@ var Sun = {
   solarTransitTime: function() {
     return 2451545.5 + this.meanSolarNoon() + 0.0053 * Math.sin(this.meanAnomoly()) - 0.0069 * Math.sin(2.0 * this.eclipticLongitude());
   },
-  riseSet: function(tz) {
-    /** TODO: Could be memoized, to only recalc once per day / week / month */
+  calcRiseSet: function(tz) {
     var j_transit = this.solarTransitTime();
     var w0 = this.hourAngle();
     var jd = this.date.JulianDate();
-    var rs = [(-24. * (jd - j_transit + (w0 / 6.283185307179586)) + tz) % 24, (-24. * (jd - j_transit - (w0 / 6.283185307179586)) + tz) % 24];
-    if (rs[0] < 0) {rs[0] += 24;}
-    if (rs[1] < 0) {rs[1] += 24;}
-    return rs;
+    this.rs = [(-24. * (jd - j_transit + (w0 / 6.283185307179586)) + tz) % 24, (-24. * (jd - j_transit - (w0 / 6.283185307179586)) + tz) % 24];
+    if (this.rs[0] < 0) {this.rs[0] += 24;}
+    if (this.rs[1] < 0) {this.rs[1] += 24;}
+    this.rs_n = this.n>>2;
+  },
+  riseSet: function(tz) {
+    /** Memoize this calculation, to only recalc once every 4 days */
+    if (this.rs_n != this.n>>2) {
+      this.calcRiseSet(tz);
+    }
+    return this.rs;
   },
   getZenith: function() {
     return this.zenith;
@@ -95,5 +103,6 @@ var Astronomy = {
 
   advanceTime: function(minutes) {
     this.time.addMinutes(minutes);
+    Sun.setDate(this.time);
   }
 }
