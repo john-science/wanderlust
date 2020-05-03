@@ -29,10 +29,10 @@ var Player = {
 			return [rr, cc];
 		};
 
-        [this.r, this.c] = start_at_edge();
-        while (map_data["land_cover"][this.r][this.c] <= 11) {
-        	[this.r, this.c] = start_at_edge();
-        }
+		[this.r, this.c] = start_at_edge();
+		while (map_data["land_cover"][this.r][this.c] <= 11) {
+			[this.r, this.c] = start_at_edge();
+		}
 	},
 
 	timeTraveled: function(distance, elev0, elev1, land_cover) {
