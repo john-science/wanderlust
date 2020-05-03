@@ -1,9 +1,9 @@
 /** This is placeholder map data, for development purposes.
-    This was found using the NLCD Data Viewer at:
-    https://www.mrlc.gov/viewerjs/
-    In the future, I would want regional data files, loaded by AJAX for terrain.
-    Something like:
-    https://laracasts.com/discuss/channels/general-discussion/load-json-file-from-javascript
+This was found using the NLCD Data Viewer at:
+https://www.mrlc.gov/viewerjs/
+In the future, I would want regional data files, loaded by AJAX for terrain.
+Something like:
+https://laracasts.com/discuss/channels/general-discussion/load-json-file-from-javascript
 */
 
 var map_data = {"land_cover":[[42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,52,11,11,11,11,11,11,11,11,11,52,52,52,52,52,52,52,71,52,52,52,42,52,52,71,71,71,71,52,52,71,52,42,52,52,52,52,42,52,52,52,52,71,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,71,71,52,52,52,52,71,52,52,52,52,52,71,52],

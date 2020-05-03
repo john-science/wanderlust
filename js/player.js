@@ -1,6 +1,6 @@
 var Player = {
-	r: Math.randInt(0, 10),
-	c: Math.randInt(0, 10),
+	r: 0,
+	c: 0,
 	symbol: '@',
 	color: 'yellow',  /** TODO: Color could indicate health, or sleepiness */
 	health: 1.0,
@@ -8,7 +8,32 @@ var Player = {
 	seen_it: {},
 	exp: 0,
 
-	init: function() {},
+	init: function() {
+		var start_at_edge = function() {
+			var side = Math.randInt(0, 4);
+			var rr = 0;
+			var cc = 0;
+			if (side == 0) {  // North
+				rr = 0;
+				cc = Math.randInt(0, map_data["ncols"]);
+			} else if (side == 1) {  // South
+				rr = map_data["nrows"] - 1;
+				cc = Math.randInt(0, map_data["ncols"]);
+			} else if (side == 2) {  // West
+				rr = Math.randInt(0, map_data["nrows"]);
+				cc = 0;
+			} else {  // East
+				rr = Math.randInt(0, map_data["nrows"]);
+				cc = map_data["ncols"] - 1;
+			}
+			return [rr, cc];
+		};
+
+        [this.r, this.c] = start_at_edge();
+        while (map_data["land_cover"][this.r][this.c] <= 11) {
+        	[this.r, this.c] = start_at_edge();
+        }
+	},
 
 	timeTraveled: function(distance, elev0, elev1, land_cover) {
 		/** Calculate the time it takes for the hiker to travel a given distance. */
@@ -19,12 +44,12 @@ var Player = {
 			var pac = 0.01 * Math.exp(3.5 * Math.abs(0.05 + slope));
 			if (pac > 0.5) { return 0.5; }
 			else { return pac; }
-		}
+		};
 
-	  var pace = toblersRule((elev1 - elev0) / 30.0);
-	  var land_cover_factor = 1.0 + 6.0 * (land_cover / 100.0)**2;
+		var pace = toblersRule((elev1 - elev0) / 30.0);
+		var land_cover_factor = 1.0 + 6.0 * (land_cover / 100.0)**2;
 
-	  return pace * distance * land_cover_factor;
+		return pace * distance * land_cover_factor;
 	},
 
 	move: function(direction) {
