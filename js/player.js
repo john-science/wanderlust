@@ -2,9 +2,9 @@ var Player = {
 	r: 0,
 	c: 0,
 	symbol: '@',
-	color: 'yellow',  /** TODO: Color could indicate health, or sleepiness */
-	health: 1.0,
-	hrs_awake: -0.5,
+	health: 0;  /* 0 = good, 1 = meh, 2 = tired/thirsty/bad */
+	color: 'yellow',  /* yellow = good, orange = meh, red = tired/thirsty/bad */
+	awake_min: -30.0,
 	seen_it: {},
 	exp: 0,
 
@@ -61,7 +61,8 @@ var Player = {
 		var new_c = this.c + direction[1];
 		if (new_r > -1 && new_r < map_data["nrows"]) {
 			if (new_c > -1 && new_c < map_data["ncols"]) {
-				if (map_data["land_cover"][new_r][new_c] > 11) {
+				if (map_data["land_cover"][new_r][new_c] > 11) {  /* don't move onto water */
+					/* Determine the distance moved */
 					this.r = new_r;
 					this.c = new_c;
 					var dist = map_data["edge_meters"];
@@ -69,9 +70,13 @@ var Player = {
 						/* moving diagonally */
 						dist *= 1.4142135623730951;
 					}
-					var time = this.timeTraveled(dist, map_data["elevation"][this.r][this.c], map_data["elevation"][new_r][new_c], map_data["land_cover"][new_r][new_c]);
+
+					/* Let time pass while they move */
+					var time = this.timeTraveled(dist, map_data["elevation"][this.r][this.c],
+												map_data["elevation"][new_r][new_c], map_data["land_cover"][new_r][new_c]);
+					if (this.health > 1 ) {time *= this.health;}  /* Very tired people hike slower */
 					Astronomy.advanceTime(time);
-					this.hrs_awake += time / 60.0;
+					this.awake_min += time;
 
 					/* Update the Experience */
 					this.exp += time;  /* Walking is always worthwhile */
@@ -79,6 +84,7 @@ var Player = {
 						/* Exploring new places is good for the soul */
 						this.exp += time;
 					}
+
 					/* Update the exploration history */
 					this.seen_it[[new_r>>2, new_c>>2]] = true;
 				}
@@ -101,12 +107,29 @@ var Player = {
 
 	sleep: function(minutes) {
 		/** TODO: this logic could be more continuous */
-		if (minutes > 539) {this.hrs_awake = -0.5;}
-		else if (minutes > 449) {this.hrs_awake = 0.0;}
-		else if (minutes > 359) {this.hrs_awake = 1.0;}
+		if (minutes > 539) {this.awake_min = -30.0;}
+		else if (minutes > 449) {this.awake_min = 0.0;}
+		else if (minutes > 359) {this.awake_min = 60.0;}
+	},
+
+	health_color: function() {
+		if (this.health >= 2) {this.color = 'red';}
+		else if (this.health >= 1) {this.color = 'orange';}
+		else {this.color = 'yellow';}
+	},
+
+	calc_health: function() {
+		/* For now, a player's health is entirely how sleepy they are */
+		if (this.awake_min > (960)) {this.health = 2;}  /* 16 hrs */
+		else if (this.awake_min > (840)) {this.health = 1;}  /* 14 hrs */
+		else {this.health = 0;}
+
+		this.health_color();
 	},
 
 	draw: function() {
+		this.calc_health();
+
 		Game.display.draw(this.c - Game.corner_col, this.r - Game.corner_row, this.symbol, this.color,
 						  'rgba(' + land_cover_colors[map_data["land_cover"][this.r][this.c]] + ',1)');
 	}

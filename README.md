@@ -9,4 +9,4 @@ Similarly, Wanderlust is a relaxing pursuit for the developer. The angle of the 
 
 ## Technology
 
-This Rougelite was built using vanilla JavaScript and only one library: [rot.js](https://github.com/ondras/rot.js)
+This Rougelite was built using vanilla JavaScript and only one library: [rot.js](https://github.com/ondras/rot.js).
