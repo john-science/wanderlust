@@ -2,7 +2,7 @@ var Player = {
 	r: 0,
 	c: 0,
 	symbol: '@',
-	health: 0;  /* 0 = good, 1 = meh, 2 = tired/thirsty/bad */
+	health: 0,  /* 0 = good, 1 = meh, 2 = tired/thirsty/bad */
 	color: 'yellow',  /* yellow = good, orange = meh, red = tired/thirsty/bad */
 	awake_min: -30.0,
 	seen_it: {},
