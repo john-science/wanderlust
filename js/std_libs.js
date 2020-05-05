@@ -89,7 +89,7 @@ Date.prototype.getLocalTime = function() {
 }
 
 /** Default timezone is Cali instead of GMT, sue me. */
-Date.prototype.tz = -8;
+Date.prototype.tz = map_data["time_zone"];
 
 Date.prototype.getLocalHours = function() {
 	/** Get the local time (in hours), on a 24-hour clock. */

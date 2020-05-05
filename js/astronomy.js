@@ -77,7 +77,7 @@ var Sun = {
 		/** Calculate the Zenith/Azimuth path of the Sun across the sky
 		zenith = pi/4 * sin((azimuth - 0.54)/(pi/2)) - 0.2
 		NOTE: this is just a mid-Northern-latitude, Summer day-only placeholder */
-		var rs = this.riseSet(-8);
+		var rs = this.riseSet(map_data["time_zone"]);
 		var hr = this.date.getLocalHrFraction();
 		if (hr < rs[0] || hr > rs[1]) {
 			this.azimuth = 1.0;
