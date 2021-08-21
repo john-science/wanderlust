@@ -6,6 +6,8 @@ Wanderlust is, essentially, a hiking simulator. There will never be gun fights o
 
 Similarly, Wanderlust is a relaxing pursuit for the developer. The angle of the sun will accurately shade the hills you walk over; though most won't notice. Probably, no final, production-ready version of this game will ever exist.
 
+> I've decided to make the *point* of this game to survive in the wild, using real-life survival practices.
+
 
 ## Technology
 
